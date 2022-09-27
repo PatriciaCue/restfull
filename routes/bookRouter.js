@@ -1,28 +1,15 @@
 const express = require('express');
-
+const booksController = require('../controllers/bookControler');
 function routes(Book){
 const bookRouter = express.Router();
 
 //Añadir libros
 bookRouter.route('/books')
-  .post((req,res)=>{
-    const book= new Book(req.body);
-    console.log(book);
-    book.save();
-    return res.status(201).json(book);
-  });
+  .post(booksController(Book).post);
 
 //Listar libros
 bookRouter.route('/books')
-  .get((req, res) => {
-    const { query } = req;
-    Book.find(query, (err,books)=>{
-      if(err){
-        return res.send(err);
-      }
-        return res.json(books);
-    });
-  });
+  .get(booksController(Book).get);
 
 //Buscar por id
 //Middleware
