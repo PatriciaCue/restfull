@@ -1,0 +1,67 @@
+CREACION DE API RESTFUL
+
+1º Tenemos que tener instalado node, para comprobarlo desde terminal:
+node --version, nos tiene que responder la consola con la version de node
+
+Hemos instalado express, nodemon, lint y creado nuestra primera peticion get 'books'
+
+Instalacion de mongo
+https://www.mongodb.com/
+https://www.mongodb.com/try/download/community!
+https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/
+
+Pasos Instalacion de mongo
+brew tap mongodb/brew
+brew update
+brew install mongodb-community@6.0
+
+API
+
+/////GET --> Visualizar datos
+//Obtener todos los libros//
+bookRouter.route('/books')
+  .get((req, res) => {
+    Book.find((err,books)=>{
+      if(err){
+        return res.send(err);
+      }
+        return res.json(books);
+    });
+  });
+
+//Filtar por un id determinado:
+bookRouter.route('/books/:bookId')
+  .get((req, res) => {
+    Book.findById(req.params.bookId,(err,books)=>{
+      if(err){
+        return res.send(err);
+      }
+        return res.json(books);
+    });
+});
+
+URL del navegador para comprobar que funciona:
+-http://localhost:4000/api/books/6331c6d349f1621ad17ee363
+
+
+/////POST --> Add new data
+Para hacer post tenemos que añadir a nuestra aplicacion body-parser, tenemos que 
+instalarlo tambien con npm install
+$npm i body-parser
+
+En app.js
+const bodyParser= require('body-parser');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+Para guardarlo en la base de datos tenemos que hacer .save();
+
+Para que el codigo quede mas limpio creamos las carpetas:
+Modelos, donde se crean los ficheros q se van a mapear con la BD
+Routes, donde se va a definir las acciones de la API get,post,put...
+
+//////DELETE --> Borrar datos
+
+//////PUT/PATCH --> Modificar datos
+
