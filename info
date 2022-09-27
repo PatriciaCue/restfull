@@ -45,6 +45,21 @@ URL del navegador para comprobar que funciona:
 
 
 /////POST --> Add new data
+Para hacer post tenemos que añadir a nuestra aplicacion body-parser, tenemos que 
+instalarlo tambien con npm install
+$npm i body-parser
+
+En app.js
+const bodyParser= require('body-parser');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+Para guardarlo en la base de datos tenemos que hacer .save();
+
+Para que el codigo quede mas limpio creamos las carpetas:
+Modelos, donde se crean los ficheros q se van a mapear con la BD
+Routes, donde se va a definir las acciones de la API get,post,put...
 
 //////DELETE --> Borrar datos
 
